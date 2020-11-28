@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_054156) do
+ActiveRecord::Schema.define(version: 2020_11_26_085008) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "rental_id"
+    t.string "name"
+    t.integer "image_id"
+    t.string "place"
+    t.integer "status", default: 0
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "equipment_id"
+    t.datetime "return_date"
+    t.datetime "rental_date"
+    t.boolean "is_returned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

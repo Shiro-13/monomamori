@@ -1,2 +1,0 @@
-class EpuipmentsController < ApplicationController
-end

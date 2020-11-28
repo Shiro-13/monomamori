@@ -1,0 +1,42 @@
+<h2>備品新規登録</h2>
+
+<%= form_with model: @equipment, url: equipments_path, local: true do |f| %>
+<div class="image_field">
+  <%= attachment_image_tag @equipment, :image, class: "img", fallback: "no-image.png" %>
+  <%= f.attachment_field :image %>
+  <!-- 画像プレビュー -->
+	<script>
+    $(function(){
+      //inputのidから情報を取得
+		  $('#item_image').on('change', function (e) {
+		  // ココから既存の画像のurlの取得
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		  		$(".image").attr('src', e.target.result);
+			}
+		  // ココまで
+		  reader.readAsDataURL(e.target.files[0]);
+		  // 取得したurlにアップロード画像のurlを取得
+	     });
+	   });
+	</script>
+</div>
+
+<h4>名前</h4>
+<div class="equipment-from">
+  <%= f.text_field :name, class:"form-control" %>
+</div>
+
+<div class="equipment-from">
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %>
+</div>
+
+<div class="equipment-from">
+  <%= f.text_field :place, class:"form-control" %>
+</div>
+
+<div class="equipment-from">
+  <%= f.text_field :caption, class:"form-control" %>
+</div>
+
+<% end %>
