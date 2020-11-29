@@ -18,7 +18,7 @@
 備品を管理する方、利用する方
 
 ### 主な利用シーン
-a
+
 
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1u03KnpAhBKDkTQUNg0b9hxxcznEQ75HZqM8X52iUars/edit?usp=sharing
