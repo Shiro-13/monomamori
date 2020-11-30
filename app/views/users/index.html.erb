@@ -1,0 +1,28 @@
+<h2>利用者一覧</h2>
+
+<!--users一覧 -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>会員ID</th>
+					<th>氏名</th>
+					<th>所属</th>
+					<th>貸出数</th>
+					<th></th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @users.each do |user| %>
+				<tr>
+					<td><%= user.id %></td>
+					<td><%= user.name %></td>
+					<td><%= user.department %></td>
+					<td></td>
+					<td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<!--users一覧 -->

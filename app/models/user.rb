@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :rentals, dependent: :destroy
 
+  enum admin: { 一般ユーザー: false, 管理者: true }
+
   validates :name, :department, presence: true
 
 end

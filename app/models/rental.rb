@@ -1,4 +1,4 @@
 class Rental < ApplicationRecord
   belongs_to :equipment
-  belongs_to :use
+  belongs_to :user
 end

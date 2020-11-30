@@ -1,0 +1,81 @@
+<h2><%= @user.name %>さんのページ</h2>
+<div class="col-xs-3">
+  <h3>登録情報</h3>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>顧客ID</th>
+          <td>
+            <label for="name"><%= @user.id %>　<span class="label label-info"><%= @user.admin %></span></label>
+          </td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= @user.name%></td>
+        </tr>
+        <tr>
+          <th>所属</th>
+          <td><%= @user.department %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "登録情報を編集する", edit_user_path, class: "btn btn-success" %>
+  </div>
+
+<div class="col-xs-9">
+    <h3>借りている備品</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>貸出日</th>
+            <th>返却日</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <!--< @users.each do |user| %>-->
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to "返却する", "#", class: "btn btn-success" %></td>
+          </tr>
+  				<!--< end %>-->
+        </tbody>
+      </table>
+	</div>
+
+  <div class="col-xs-9">
+    <h3>ブックマークした備品</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>種類</th>
+            <th>保管場所</th>
+            <th>貸出情報</th>
+            <th></th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <!--< @users.each do |user| %>-->
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to "詳細", "#", class: "btn btn-primary" %></td>
+          </tr>
+  				<!--< end %>-->
+        </tbody>
+      </table>
+	</div>
