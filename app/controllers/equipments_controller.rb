@@ -1,7 +1,7 @@
 class EquipmentsController < ApplicationController
 
 def index
-  @equipments = all_equipments.page(params[:page]).per(10)
+  @equipments = Equipments.all
 end
 
 def new

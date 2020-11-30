@@ -1,0 +1,65 @@
+<% if @item.errors.any? %>
+  <div id="erro_explanation" class="alert alert-danger">
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message%></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h2 class="section-ttl">”<%= @item.name %>”の編集</h2>
+<%= form_with model: @item, url: item_path(@item), local: true do |f| %>
+<div class="item_image">
+  <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
+  <%= f.attachment_field :image %>
+</div>
+  <!-- 画像プレビュー -->
+	<script>
+    $(function(){
+      //inputのidから情報を取得
+		  $('#item_image').on('change', function (e) {
+		  // ココから既存の画像のurlの取得
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		  		$(".image").attr('src', e.target.result);
+			}
+		  // ココまで
+		  reader.readAsDataURL(e.target.files[0]);
+		  // 取得したurlにアップロード画像のurlを取得
+	     });
+	   });
+	</script>
+
+<h4>名前</h4>
+<div class="item-from">
+  <%= f.text_field :name, class:"form-control" %>
+</div>
+
+<h4>カテゴリ</h4>
+<div class="item-from">
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %>
+</div>
+
+<h4>保管場所</h4>
+<div class="item-from">
+  <%= f.text_field :place, class:"form-control" %>
+</div>
+
+<h4>説明</h4>
+<div class="item-from">
+  <%= f.text_field :caption, class:"form-control" %>
+</div>
+
+<h4>貸出ステータス</h4>
+<div class="item-from">
+  <%= f.radio_button :status, "貸出可"%>
+  <%= f.label :"貸出可" %>&emsp;
+  <%= f.radio_button :status, "貸出中" %>
+  <%= f.label :"貸出中" %>
+</div>
+
+<div class="flex align-center pl5">
+	<%= f.submit "登録内容を更新する", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+</div>
+
+<% end %>

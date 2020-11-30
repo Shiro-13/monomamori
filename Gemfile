@@ -69,6 +69,7 @@ gem "refile-mini_magick"
 gem 'kaminari','~> 1.2.1'
 gem 'cancancan'
 gem 'dotenv-rails'
+gem 'pry-byebug'
 group :production do
   gem 'mysql2'
 end
