@@ -44,8 +44,18 @@
     <div class="flex align-center pl5">
       <%= link_to "編集する", edit_item_path(@item), class: "btn btn-success" %>
     </div>
+    <% if @item.status == '貸出中' %>
+      <h3>貸出中</h3>
+    <% else %>
+      <% form_with model: @rental, url: rentals_path, local: true do |f| %>
+      <div class="flex align-center pl5">
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.submit "借りる", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    <% end %>
     <div class="flex align-center pl5">
-      <%= link_to "借りる", "#", class: "btn btn-primary" %>
+      <%= link_to "削除する", item_path(@item), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
     </div>
   </div>
 </section>

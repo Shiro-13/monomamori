@@ -1,4 +1,4 @@
 class Rental < ApplicationRecord
-  belongs_to :equipment
-  belongs_to :user
+  belongs_to :item, inverse_of: :rentals
+  belongs_to :user, inverse_of: :rentals
 end

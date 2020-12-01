@@ -1,0 +1,26 @@
+<h2>貸出備品一覧</h2>
+
+<hr>
+
+<% if @rentals.any? %>
+<table class="table table-bordered table-hover">
+  <thead>
+     <tr class="info"><th>#</th><th>タイトル</th><th>貸出日時</th></tr>
+  </thead>
+  <tbody>
+    <% @rentals.each_with_index do |r, i| %>
+    <tr>
+    <td><%= i+1 %></td>
+    <td><%= r.item.title %></td>
+    <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
+    <td width="100" align="center">
+      <%= link_to '返却', rental_path(r.id), method: :delete, data: { confirm: "この本を返却します。よろしいですか？" }, :class => "btn btn-danger" %>
+    </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <h4>貸出中の備品はありません</h4>
+<% end %>
+

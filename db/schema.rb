@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_101656) do
+ActiveRecord::Schema.define(version: 2020_12_01_085002) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_rental_infos", force: :cascade do |t|
+    t.integer "rental_count", default: 0
+    t.boolean "is_rentaled", default: false
+    t.integer "last_rental_id"
+    t.string "last_rental_name"
+    t.integer "now_rental_id"
+    t.string "now_rental_name"
+    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,12 +49,12 @@ ActiveRecord::Schema.define(version: 2020_11_30_101656) do
 
   create_table "rentals", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "equipment_id"
     t.datetime "return_date"
     t.datetime "rental_date"
     t.boolean "is_returned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "item_id"
   end
 
   create_table "users", force: :cascade do |t|

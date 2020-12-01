@@ -1,0 +1,13 @@
+<h2>本の貸出</h2>
+
+<%= form_with model: @rental, url: rentals_path, local: true do |f| %>
+  <%= f.text_field :book_code %>
+  <input class="btn btn-danger" type="button" id="search_button", value="検索">
+  <b id="error_msg">  </b>
+  <hr>
+  <%= f.text_field :title, :readonly => true %>
+  <%= f.text_field :author, :readonly => true %>
+  <%= f.text_field :manufacturer, :readonly => true %>
+  <%= f.text_field :id, :readonly => true %>
+  <%= f.submit "貸出", id: "rental_button", disabled: "disabled" %>
+<% end %>

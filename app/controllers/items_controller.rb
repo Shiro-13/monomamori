@@ -20,6 +20,7 @@ end
 
 def show
   @item = Item.find(params[:id])
+  @rental = Rental.new
 end
 
 def edit
@@ -36,6 +37,11 @@ def update
 end
 
 def destroy
+  if @item.destroy
+    redirect_to items_path
+  else
+    render :show
+  end
 end
 
 private

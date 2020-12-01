@@ -4,9 +4,9 @@
   <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-group has-icon">
-      <%= f.radio_button :admin, false %>
+      <%= f.radio_button :admin, '一般ユーザー' %>
       <%= f.label :"一般ユーザー" %>&emsp;
-      <%= f.radio_button :admin, true %>
+      <%= f.radio_button :admin, '管理者' %>
       <%= f.label :"管理者" %>
     </div>
     <div class="form-group has-icon">
