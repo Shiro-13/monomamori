@@ -25,10 +25,7 @@ Rails.application.routes.draw do
   resources :logs
   resources :post_rentals, only:[:index, :update, :create]
   # get '/post_rentals' => 'post_rentals#post_rental'
-
-
-  # post 'rentals'
-  # get
+  get '/search' => 'searchs#search'
 
   # get 'get_info', to: 'items#get_info', path: "/items/new/get_info"
   # get 'return', to: 'rentals#pre_return', path: "/rentals/return"

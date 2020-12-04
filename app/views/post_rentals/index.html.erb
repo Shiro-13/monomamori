@@ -1,12 +1,10 @@
-<%= flash[:cart] %>
-
 <h2>（備品名称）の貸出</h2>
 
 <!--< @post_rental.each do |post_rental| %>-->
 <!--貸出備品情報-->
 <h3>【貸出備品情報】</h3>
 <h4>名前&emsp;<%= @item.name %></h4>
-<h4>保管場所&emsp;<%= @post_rental.item.place %></h4>
+<h4>保管場所&emsp;<%= @item.place %></h4>
 
 <hr>
 

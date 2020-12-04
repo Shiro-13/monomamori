@@ -45,6 +45,10 @@ def destroy
   end
 end
 
+def search
+  @items = Item.search(params[:search])
+end
+
 private
 def item_params
   params.require(:item).permit(:name, :caption, :place, :status, :category_id, :renral_id, :image)

@@ -58,6 +58,7 @@
         <thead>
           <tr>
             <th>名前</th>
+            <th>カテゴリ</th>
             <th>保管場所</th>
             <th>貸出情報</th>
             <th></th>
@@ -70,6 +71,7 @@
             <% @favorite_list.each do |favo| %>
               <tr>
                 <td><%= favo.name %></td>
+                <td><%= favo.category.name %></td>
                 <td><%= favo.place %></td>
                 <td><%= favo.status %></td>
                 <td><%= link_to "詳細", item_path(@favorite_list), class: "btn btn-primary" %></td>

@@ -12,7 +12,7 @@ class PostRentalsController < ApplicationController
     # @user = current_user
     @post_rental = PostRental.new(post_rental_params)
     @user = User.find(params[:post_rental][:user_id])
-    # @item =Item.find(params[:post_rental][:item_id])
+    @item =Item.find(params[:post_rental][:item_id])
     # @post_rental.user_id = current_user.id
     # @current_item = PostRental.find_by(item_id: @post_rental.item_id, user_id: @post_rental.user_id)
     # @post_rental = PostRental.new({user_id:params[:user_id], item_id:params[:item_id]})

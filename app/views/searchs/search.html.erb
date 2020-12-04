@@ -1,0 +1,25 @@
+<h3>検索ワード：'<%= @search %>'</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>カテゴリ</th>
+      <th>保管場所</th>
+      <th>貸出状況</th>
+      <th></th>
+      <th></th>
+        </tr>
+    </thead>
+    <tbody id="item">
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.category.name %></td>
+        <td><%= item.place %></td>
+        <td><%= item.status %></td>
+        <td><%= link_to "詳細", item_path(item) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+</table>
