@@ -42,6 +42,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pry-byebug'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -69,8 +70,6 @@ gem "refile-mini_magick"
 gem 'kaminari','~> 1.2.1'
 gem 'cancancan'
 gem 'dotenv-rails'
-gem 'pry-byebug'
-gem 'jquery-turbolinks'
 group :production do
   gem 'mysql2'
 end

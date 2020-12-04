@@ -6,23 +6,9 @@
         <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
       </div>
     </div>
-    <!--<div class='star-btn' id="like_<= @item.id %>">-->
-    <!--  <= render "favorites/favorite", locals: {item: @item} %>-->
-    <% if @item.favorited_by?(current_user) %>
-    <li>
-      <%= link_to item_favorites_path(@item), method: :delete do %>
-        <i class="far fa-bookmark" aria-hidden="true" ></i>
-        ブックマークする
-      <% end %>
-    </li>
-    <% else %>
-    <li>
-      <%= link_to item_favorites_path(@item), method: :post do %>
-        <i class="fas fa-bookmark" aria-hidden="true" style="color: gray;"></i>
-        ブックマーク済み
-      <% end %>
-    </li>
-    <% end %>
+    <div id="favorite_buttons_<%= @item.id %>">
+      <%= render partial: "favorites/favorite", locals: {item: @item} %>
+    
     </div>
     <table class="table">
       <thead>
