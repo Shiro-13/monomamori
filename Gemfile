@@ -70,6 +70,7 @@ gem 'kaminari','~> 1.2.1'
 gem 'cancancan'
 gem 'dotenv-rails'
 gem 'pry-byebug'
+gem 'jquery-turbolinks'
 group :production do
   gem 'mysql2'
 end

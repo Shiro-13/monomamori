@@ -1,3 +1,3 @@
 class ItemRentalInfo < ApplicationRecord
-  belongs_to :book
+  belongs_to :item
 end

@@ -19,8 +19,9 @@ def create
 end
 
 def show
+  @user = current_user
   @item = Item.find(params[:id])
-  @rental = Rental.new
+  @post_rental = PostRental.new
 end
 
 def edit

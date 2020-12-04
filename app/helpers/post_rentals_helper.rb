@@ -1,0 +1,2 @@
+module PostRentalsHelper
+end

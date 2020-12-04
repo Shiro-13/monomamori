@@ -6,7 +6,25 @@
         <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
       </div>
     </div>
-    <table>
+    <!--<div class='star-btn' id="like_<= @item.id %>">-->
+    <!--  <= render "favorites/favorite", locals: {item: @item} %>-->
+    <% if @item.favorited_by?(current_user) %>
+    <li>
+      <%= link_to item_favorites_path(@item), method: :delete do %>
+        <i class="far fa-bookmark" aria-hidden="true" ></i>
+        ブックマークする
+      <% end %>
+    </li>
+    <% else %>
+    <li>
+      <%= link_to item_favorites_path(@item), method: :post do %>
+        <i class="fas fa-bookmark" aria-hidden="true" style="color: gray;"></i>
+        ブックマーク済み
+      <% end %>
+    </li>
+    <% end %>
+    </div>
+    <table class="table">
       <thead>
         <tr>
           <th></th>
@@ -33,27 +51,33 @@
         <tr>
           <td>
             <% if @item.status? %>
-              <span class="text-active">貸出可</span>
+              <strong>貸出可</strong>
             <% else %>
-              <span class="text-active">貸出中</span>
+              <strong>貸出中</strong>
             <% end %>
           </td>
         </tr>
       </tbody>
     </table>
+
     <div class="flex align-center pl5">
       <%= link_to "編集する", edit_item_path(@item), class: "btn btn-success" %>
     </div>
-    <% if @item.status == '貸出中' %>
-      <h3>貸出中</h3>
-    <% else %>
-      <% form_with model: @rental, url: rentals_path, local: true do |f| %>
-      <div class="flex align-center pl5">
-        <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "借りる", class: "btn btn-primary" %>
-      </div>
+
+    <% if user_signed_in? %>
+      <% if @item.status == '貸出可' %>
+        <%= form_with model: @post_rental, url: post_rentals_path(@post_rental), method: :post, local: true do |f| %>
+          <div class="flex align-center pl5">
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.submit "借りる", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      <% else %>
+        <h3>貸出中</h3>
       <% end %>
     <% end %>
+
     <div class="flex align-center pl5">
       <%= link_to "削除する", item_path(@item), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
     </div>
