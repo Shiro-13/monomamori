@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+load_and_authorize_resource
 def index
     @items = Item.all.page(params[:page]).per(10)
 end
@@ -21,7 +21,7 @@ end
 def show
   @user = current_user
   @item = Item.find(params[:id])
-  @post_rental = PostRental.new
+  @rental = Rental.new
 end
 
 def edit
@@ -45,12 +45,9 @@ def destroy
   end
 end
 
-def search
-  @items = Item.search(params[:search])
-end
 
 private
 def item_params
-  params.require(:item).permit(:name, :caption, :place, :status, :category_id, :renral_id, :image)
+  params.require(:item).permit(:name, :caption, :place, :status, :category_id, :image)
 end
 end

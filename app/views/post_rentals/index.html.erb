@@ -1,10 +1,9 @@
-<h2>（備品名称）の貸出</h2>
+<h2><%= @post_rental.item.name %>の貸出</h2>
 
-<!--< @post_rental.each do |post_rental| %>-->
 <!--貸出備品情報-->
 <h3>【貸出備品情報】</h3>
-<h4>名前&emsp;<%= @item.name %></h4>
-<h4>保管場所&emsp;<%= @item.place %></h4>
+<h4>名前&emsp;<%= @post_rental.item.name %></h4>
+<h4>保管場所&emsp;<%= @post_rental.item.place %></h4>
 
 <hr>
 
@@ -15,9 +14,10 @@
 <hr>
 
 <%= form_with model: @rental, url: rentals_path, local: true do |f| %>
-  <%= f.label :貸出日 %>
+  <%= f.label :貸出日, class: "control-label col-xs-2" %>
   <%= f.date_field :rental_date, class: 'form-control' %><br>
-  <%= f.label :返却予定日 %>
+  <%= f.label :期間, class: "control-label col-xs-2" %>
   <%= f.date_field :return_date, class: 'form-control' %><br>
+  <%= f.hidden_field :item_id, value: @post_rental.item.id %>
   <%= f.submit "貸出", id: "rental_button" %>
 <% end %>

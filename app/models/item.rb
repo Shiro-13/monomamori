@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
-  belongs_to :category
-  has_one :rental
+  belongs_to :category, optional: true
+  has_many :rentals
   has_many :post_rentals
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :favorites, dependent: :destroy
   attachment :image
   validates :name, :place, :status, :caption, presence: true

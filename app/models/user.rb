@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :items, through: :post_rentals
   has_many :favorites, dependent: :destroy
   has_many :favorite_items, through: :favorites, source: :item # ユーザーがブックマークした備品を直接アソシエーションで取得
- 
-  enum admin: { 一般ユーザー: false, 管理者: true }
+
+  enum role: { admin: 1, menber: 2 }
 
   validates :name, :department, presence: true
 

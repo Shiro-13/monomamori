@@ -1,6 +1,6 @@
 class Rental < ApplicationRecord
-  belongs_to :item, inverse_of: :rentals
-  belongs_to :user, inverse_of: :rentals
+  belongs_to :item
+  belongs_to :user
 
   enum is_returned: {
     返却済み: true,

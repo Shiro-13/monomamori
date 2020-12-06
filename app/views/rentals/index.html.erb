@@ -2,25 +2,29 @@
 
 <hr>
 
-<% if @rentals.any? %>
+<%# if @rentals.any? %>
 <table class="table table-bordered table-hover">
   <thead>
-     <tr class="info"><th>#</th><th>タイトル</th><th>貸出日時</th></tr>
+     <tr class="info">
+       <th>名前</th>
+       <th>貸出日時</th>
+       <th>返却予定日<th>
+     </tr>
   </thead>
   <tbody>
-    <% @rentals.each_with_index do |r, i| %>
+    <% @rentals.each do |rental| %>
     <tr>
-    <td><%= i+1 %></td>
-    <td><%= r.item.title %></td>
-    <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
+    <td><%= rental.item.name %></td>
+    <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
+    <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
     <td width="100" align="center">
-      <%= link_to '返却', rental_path(r.id), method: :delete, data: { confirm: "この本を返却します。よろしいですか？" }, :class => "btn btn-danger" %>
+      <%= link_to '返却', rental_path(rental.id), method: :delete, data: { confirm: "この本を返却します。よろしいですか？" }, :class => "btn btn-danger" %>
     </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-<% else %>
+<%# else %>
   <h4>貸出中の備品はありません</h4>
-<% end %>
+<%# end %>
 

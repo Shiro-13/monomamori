@@ -20,11 +20,11 @@ Rails.application.routes.draw do
   resources :items do
     resource :favorites, only: [:create, :destroy]
   end
-  resources :rentals, only: [:index, :new, :create]
-  # post "/rentals/pre_rental" => "rentals#pre_rental", as: 'pre_rental'
+  resources :rentals, only: [:index, :create, :update]
+  get '/rentals/pre_rental' => 'rentals#pre_rental'
+  patch '/rentals/:id/confirm' => 'rentals#confirm'
   resources :logs
   resources :post_rentals, only:[:index, :update, :create]
-  # get '/post_rentals' => 'post_rentals#post_rental'
   get '/search' => 'searchs#search'
 
   # get 'get_info', to: 'items#get_info', path: "/items/new/get_info"

@@ -16,7 +16,81 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// ヘッダー
+
+/* カラーコード */
+$light_blue: #00B6C2;
+$navy: #101d4d;
+$white: #ffffff;
+$yellow: #FFEB00;
+$light_green: #A1BE00;
+$gray: #dee2e6;
+$dark_gray: #383838;
+$red:#c70000;
+
+/* 共通 */
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: $dark_gray;
+}
+
+body{
+	display: flex;
+	flex-flow: column;
+	min-height: 100vh;
+}
+
+main{
+	flex: 1;
+}
+
+a{
+	text-decoration: none;
+	color: $navy;
+
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+.pagenation{
+	justify-content: center;
+}
+
+#error_explanation{
+	color: $red;
+	li{
+	color: $red;
+	}
+}
+
+/* ヘッダー */
+.nav_container{
+	background-color: $light_blue;
+	height: 80px;
+}
+
+.site-logo{
+	&:hover{
+	color: $white;
+	}
+}
+
+.nav_list_item{
+	a{
+	color: $white;
+	}
+}
+
+.page_title{
+	background-color: $gray;
+	padding: 5px 20px;
+	margin: 30px auto;
+	text-align: center;
+	font-weight: bold;
+}
+
 .header-4 {
   box-sizing: border-box;
   width: 100%;
@@ -41,6 +115,7 @@
   -webkit-appearance: none;
 }
 
+// 検索窓
 .form2-input:focus {
   border: 1px solid #00b5ad;
 }
@@ -59,4 +134,32 @@
   background: inherit;
   border: 0;
   opacity: 0.54;
+}
+
+/* button */
+.btn_yellow{
+	background-color: $yellow;
+	color: $dark_gray;
+
+	&:hover{
+		color: $dark_gray;
+	}
+}
+
+.btn_navy{
+	background-color: $navy;
+	color: $white;
+
+	&:hover{
+		color: $white;
+	}
+}
+
+.btn_light_blue{
+	background-color: $light_blue;
+	color: $white;
+
+	&:hover{
+		color: $white;
+	}
 }

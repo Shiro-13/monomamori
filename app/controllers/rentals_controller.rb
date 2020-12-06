@@ -1,72 +1,51 @@
 class RentalsController < ApplicationController
+  load_and_authorize_resource
 
   def index
-    @rentals = current_user.rentals.where(is_returned: false)
+    @user = current_user
+    rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_rentalを使用するためrentalに代入。
+    @rentals = current_user.rentals.all
   end
 
-  # def pre_rental
-  #   @rental = Rental.new(rental_params)
-  #   @rental.save
-  #   redirect_to new_rental_path
-  #   @user = current_user
-    # @rentals =current_user.rentals.find_by(item_id: params[:item_id])
-  # end
-
-  def new
-    @item = Item.new
+  def pre_rental
     @user = current_user
-    @rental = current_user.rentals.new
+    rental_id = params[:rental_id]
+    #@rental = Rental.find_by(user_id: current_user.id)
+    @rental = Rental.find(rental_id)
   end
 
   def create
+    @user = current_user
     @rental = Rental.new(rental_params)
+    @item =Item.find(params[:rental][:item_id])
+    @rental.user_id = current_user.id
     if @rental.save
-      flash[:success] = "備品の貸出手続きが完了しました!"
+      redirect_to rentals_pre_rental_path(rental_id: @rental.id)
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def confirm
+    @rental = Rental.find(params[:id])
+    @rental.rental_date = params[:rental][:rental_date]
+    @rental.return_date = params[:rental][:return_date]
+    @rental.is_returned = false
+    if @rental.save
       # 貸出後、備品ステータスを更新する
-      @item = Item.find(params[:id]) # 備品の特定
-      @item.update(item_params) #備品ステータスの更新
-      if @rental.is_returned == "貸出中"
-        Item.where(rental_id: @rental.id).update(status: "貸出中") #貸出ステータスが「貸出中」なら、備品ステータスを「貸出中」に更新
-      elsif @rental.is_returned == "返却済み"
-        Item.where(rental_id: @rental.id).update(status: "貸出可") #注文ステータスが「入金確認」なら、製作ステータスを「製作待ち」に更新
-      end
-      redirect_to @rental
+      @item = Item.find(params[:rental][:item_id]) # 備品の特定
+      @item.update(status: 1) #備品ステータスの更新
+      flash[:success] = "備品の貸出手続きが完了しました!"
+      redirect_to rentals_path
     else
       render :new
     end
   end
 
-  def pre_return
-    @item = Item.new
-  end
-
-  def post_return
-    # @item = Item.find(params[:id])
-    # puts @item.name
-    # if @item.item_rental_info.is_returned == true
-    #   @rental = @item.rentals.where(user_id: current_user.id).where(is_returned: false).first
-    #   @item.item_rental_info.is_returned = false
-    #   @rental.return_date = DateTime.now
-    #   @rental.is_returned = true
-    #   if @rental.save
-    #     @iteminfo = @item.item_rental_info
-    #     @iteminfo.last_rental_name = current_user.name
-    #     @iteminfo.now_rental_id = nil
-    #     @iteminfo.now_rental_name = nil
-    #     @iteminfo.save
-    #     redirect_to rentals_path
-    #   else
-    #     render :pre_return
-    #   end
-    # else
-    #   redirect_to "/rentals/return", notice: "その備品はすでに返却済みです。"
-    # end
-  end
 
   private
-
     def rental_params
-      params.require(:rental).permit(:rental_date, :return_date, :is_returned, :item_id, :user_id)
+      params.require(:rental).permit(:rental_date, :return_date, :is_returned, :user_id, :item_id)
     end
 
 end
