@@ -33,21 +33,23 @@
           <tr>
             <th>名前</th>
             <th>貸出日</th>
-            <th>返却日</th>
-            <th colspan="3"></th>
+            <th>返却予定日</th>
+            <th><!--返却ボタン--></th>
           </tr>
         </thead>
-
         <tbody>
-        <!--< @users.each do |user| %>-->
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><%= link_to "返却する", "#", class: "btn btn-success" %></td>
-          </tr>
-  				<!--< end %>-->
+            <% @rentals.each do |rental| %>
+              <% if rental.is_returned == "貸出中" %>
+                <tr>
+                  <td><%= rental.item.name %></td>
+                  <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= link_to '返却', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn-danger" %></td>
+                </tr>
+              <% else %>
+                <h4>借りている備品はありません。</h4>
+              <% end %>
+    				<% end %>
         </tbody>
       </table>
 	</div>
