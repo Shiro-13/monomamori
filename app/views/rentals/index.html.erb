@@ -2,7 +2,7 @@
 
 <hr>
 
-<%# if @rentals.any? %>
+<% if @rentals.any? %>
 <table class="table table-bordered table-hover">
   <thead>
      <tr class="info">
@@ -24,7 +24,7 @@
     <% end %>
   </tbody>
 </table>
-<%# else %>
+<% else %>
   <h4>貸出中の備品はありません</h4>
-<%# end %>
+<% end %>
 

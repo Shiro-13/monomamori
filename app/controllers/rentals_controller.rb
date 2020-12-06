@@ -3,15 +3,15 @@ class RentalsController < ApplicationController
 
   def index
     @user = current_user
-    rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_rentalを使用するためrentalに代入。
-    @rentals = current_user.rentals.all
+    @rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_rentalを使用するためrentalに代入。
+    # @rentals = current_user.rentals.all
   end
 
   def pre_rental
     @user = current_user
     rental_id = params[:rental_id]
-    #@rental = Rental.find_by(user_id: current_user.id)
     @rental = Rental.find(rental_id)
+    @rental.rental_date = Date.today.to_s
   end
 
   def create
