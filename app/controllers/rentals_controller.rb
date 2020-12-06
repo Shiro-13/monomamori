@@ -3,8 +3,11 @@ class RentalsController < ApplicationController
 
   def index
     @user = current_user
-    @rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_rentalを使用するためrentalに代入。
-    # @rentals = current_user.rentals.all
+    rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_orderを使用するためrentalに代入。
+    @rentals = current_user.rentals.all
+    # @rental = Rental.find_by(user_id: current_user.id)
+    rental_id = params[:rental_id]
+    @rental = Rental.find_by(rental_id)
   end
 
   def pre_rental
@@ -30,11 +33,11 @@ class RentalsController < ApplicationController
     @rental = Rental.find(params[:id])
     @rental.rental_date = params[:rental][:rental_date]
     @rental.return_date = params[:rental][:return_date]
-    @rental.is_returned = false
     if @rental.save
       # 貸出後、備品ステータスを更新する
-      @item = Item.find(params[:rental][:item_id]) # 備品の特定
-      @item.update(status: 1) #備品ステータスの更新
+      Item.find(@rental.item_id).update(status: "貸出中")
+      # @item = Item.find(params[:rental][:item_id]) # 備品の特定
+      # @item.update(status: "貸出中") #備品ステータスの更新
       flash[:success] = "備品の貸出手続きが完了しました!"
       redirect_to rentals_path
     else
@@ -42,10 +45,24 @@ class RentalsController < ApplicationController
     end
   end
 
+  def return
+    @rental = Rental.find(params[:id])
+    @rental.days = Date.today.to_s
+    @rental.update(is_returned: "返却済み")
+    if @rental.save
+      Item.find(@rental.item_id).update(status: "貸出可")
+      flash[:success] = "備品を返却しました!"
+      redirect_to rentals_path
+    else
+      flash[:notice] = "その備品はすでに返却済みです。"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
 
   private
     def rental_params
-      params.require(:rental).permit(:rental_date, :return_date, :is_returned, :user_id, :item_id)
+      params.require(:rental).permit(:rental_date, :return_date, :is_returned, :user_id, :item_id, :days)
     end
 
 end

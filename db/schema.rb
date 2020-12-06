@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_12_05_074908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_id"
-    t.integer "days"
+    t.datetime "days"
   end
 
   create_table "users", force: :cascade do |t|
