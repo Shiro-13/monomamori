@@ -5,7 +5,6 @@ class RentalsController < ApplicationController
     @user = current_user
     rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_orderを使用するためrentalに代入。
     @rentals = current_user.rentals.all
-    # @rental = Rental.find_by(user_id: current_user.id)
     rental_id = params[:rental_id]
     @rental = Rental.find_by(rental_id)
   end
@@ -59,6 +58,11 @@ class RentalsController < ApplicationController
     end
   end
 
+  def destroy
+    @rental = Rental.find(params[:id]).destroy
+    flash[:success] = "貸出情報を削除しました。"
+    redirect_to rentals_path
+  end
 
   private
     def rental_params

@@ -19,20 +19,21 @@
   <tbody>
     <% @rentals.each do |rental| %>
       <tr>
-        <td><%= rental.item.name %></td>
+        <td><%#= rental.item.name %></td>
         <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
         <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
-        <td><%= rental.days..strftime('%Y/%m/%d') %></td>
+        <td><%= rental.days.strftime('%Y/%m/%d') %></td>
         <td><%= rental.is_returned %></td>
         <td width="100" align="center">
-          <%= link_to '返却', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, :class => "btn btn-danger" %>
+          <%= link_to '返却', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn-danger" %>
         </td>
-        <% if @rental.is_returned == '返却済み' %>
         <td>
-          <%= link_to '削除', return_path(rental.id), method: :patch, data: { confirm: "この貸出履歴を削除します。よろしいですか？" }, :class => "btn btn-danger" %>
+          <% if @rental.is_returned == "返却済み" %>
+            <%= link_to '削除', rental_path(rental.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
+          <% else %>
+            <!--未返却の場合は削除ボタンを表示させない。-->
+          <% end %>
         </td>
-        <% else %>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
