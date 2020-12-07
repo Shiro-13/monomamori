@@ -14,7 +14,7 @@
   <body>
     <header class="navbar nav_container">
       <div class="container">
-        <div>
+        <div class="logo">
           <%= link_to root_path, class: "site-logo" do %>
             <%= image_tag "logo.png" %>
           <% end %>
@@ -22,19 +22,10 @@
         <ul class="nav justify-content-end">
           <% if user_signed_in? %>
             <li class="nav-item nav_list_item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-            <li class="nav-item nav_list_item"><%= link_to "貸出備品一覧", rentals_path, class: "nav-link" %></li>
             <li class="nav-item nav_list_item"><%= link_to "備品一覧", items_path, class: "nav-link" %></li>
+            <li class="nav-item nav_list_item"><%= link_to "利用履歴一覧", rentals_path, class: "nav-link" %></li>
             <li class="nav-item nav_list_item"><%= link_to "マイページ", user_path(current_user.id), class: "nav-link" %></li>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %>さん </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li class="nav-item nav_list_item"><%= link_to "プロフィール変更", edit_user_registration_path, class: "nav-link" %></li>
-                  <li class="nav-item nav_list_item"><%= link_to "マイページ", user_path(current_user.id), class: "nav-link" %></li>
-                  <li class="nav-item nav_list_item"><%= link_to "サインアウト", destroy_user_session_path, :method => :delete, class: "nav-link" %></li>
-                </ul>
-              </li>
-            </ul>
+            <li class="nav-item nav_list_item"><%= link_to "サインアウト", destroy_user_session_path, :method => :delete, class: "nav-link" %></li>
           <% else %>
             <li class="nav-item nav_list_item"><%= link_to "Home", root_path, class: "nav-link" %></li>
             <li class="nav-item nav_list_item"><%= link_to "About", about_path, class: "nav-link" %></li>
@@ -43,30 +34,24 @@
           <% end %>
         </ul>
         <div class="header-nav-item">
-          <form class="form2">
-            <input type="search" class="form2-input" placeholder="search" />
-            <button class="form2-button"><i class="fa fa-search"></i></button>
-          </form>
           <%= form_tag(search_path, method: :get) do %>
-            <%= text_field_tag :search, params[:search], placeholder: "何かお探しですか？", class: 'inpt' %>
-            <%= submit_tag "検索" %>
+            <%= text_field_tag :search, params[:search], placeholder: "何かお探しですか？", class: "form2-input" %>
+            <%= submit_tag "検索", class: "btn btn_navy btn-sm" %>
           <% end %>
         </div>
       </div>
     </header>
 
-    </header>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-
-      <footer>
-        <p>&copy; monomamori</p>
-      </footer>
-
-    </div> <!-- /container -->
+    <main>
+      <div class="container">
+        <%= yield %>
+      <div>
+    </main>
+    <footer>
+      <div class="container">
+        <p>&copy; All rights reserved by monomamori</p>
+      </div>
+    </footer>
+    
   </body>
 </html>

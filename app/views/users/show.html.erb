@@ -43,7 +43,7 @@
                 <tr>
                   <td><%= rental.item.name %></td>
                   <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
-                  <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= rental.return_date %></td>
                   <td><%= link_to '返却', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn-danger" %></td>
                 </tr>
               <% else %>
