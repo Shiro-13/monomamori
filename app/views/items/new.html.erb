@@ -1,12 +1,5 @@
-<% if @item.errors.any? %>
-  <div id="erro_explanation" class="alert alert-danger">
-    <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message%></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render 'layouts/error_messages', resource: @item %>
+
 <h2 class="section-ttl">備品新規登録</h2>
 
 <%= form_with model: @item, url: items_path, local: true do |f| %>

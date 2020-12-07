@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      item: 備品
+      rental: 貸出
+    attributes:
+      user:
+        name: 名前
+        department: 所属部署
+        email: メールアドレス
+        crypted_password: パスワード
+      item:
+        name: 名前
+        place: 保管場所
+        caption: 説明
+        category_id: カテゴリ
+      rental:
+        rental_date: 貸出日
+        return_date: 返却予定日
+

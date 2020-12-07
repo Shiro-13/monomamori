@@ -13,11 +13,12 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
 @import "bootstrap";
+// @import "font-awesome-sprockets";
+// @import "font-awesome";
 
 
-/* カラーコード */
+ //カラーコード
 $light_blue: #00B6C2;
 $navy: #101d4d;
 $white: #ffffff;
@@ -27,7 +28,7 @@ $gray: #dee2e6;
 $dark_gray: #383838;
 $red:#c70000;
 
-/* 共通 */
+ //共通
 *{
 	margin: 0;
 	padding: 0;
@@ -65,7 +66,15 @@ a{
 	}
 }
 
-/* ヘッダー */
+// バリデーションエラーメッセージによる崩れ防止
+.field_with_errors {
+  display: contents;
+  input {
+    @extend .is-invalid;
+  }
+}
+
+//  ヘッダー
 .nav_container{
 	background-color: $light_blue;
 	height: 80px;
@@ -136,7 +145,7 @@ a{
   opacity: 0.54;
 }
 
-/* button */
+ //button
 .btn_yellow{
 	background-color: $yellow;
 	color: $dark_gray;
@@ -163,3 +172,4 @@ a{
 		color: $white;
 	}
 }
+

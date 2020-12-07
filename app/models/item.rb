@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   belongs_to :user, optional: true
   has_many :favorites, dependent: :destroy
   attachment :image
-  validates :name, :place, :status, :caption, presence: true
+  validates :name, :place, :status, :caption, :category, presence: true
 
   enum status: {
     貸出可: 0,
