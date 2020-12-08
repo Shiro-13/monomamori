@@ -1,26 +1,26 @@
-<%= render 'layouts/error_messages', resource: @user %>
-
-<h2><%= @rental.item.name %>の貸出</h2>
-
+<h2 class="page_title col-lg-4 offset-lg-4">貸出手続き</h2>
+<%= render 'layouts/error_messages', resource: @rental %>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mx-auto">
 <!--貸出備品情報-->
-<h3>【貸出備品情報】</h3>
-<h4>名前&emsp;<%= @rental.item.name %></h4>
-<h4>保管場所&emsp;<%= @rental.item.place %></h4>
-
-<hr>
-
-<h3>【レンタルユーザー情報】</h3>
-<h4>所属&emsp;<%= @user.department %></h4>
-<h4>利用者氏名&emsp;<%= @user.name %></h4>
-<!--< end %>-->
-<hr>
-
-<%#= form_with model: @rental, url: confirm_path, local: true do |f| %>
-<%= form_with(model: @rental, local: true, url: "/rentals/#{@rental.id}/confirm") do |f| %>
-  <%= f.label :貸出日 %>
-  <%= f.date_field :rental_date, include_blank: true %><br>
-  <%= f.label :返却予定日 %>
-  <%= f.date_field :return_date, include_blank: true %><br>
-  <%= f.hidden_field :item_id, value: @rental.item.id %>
-  <%= f.submit "貸出", id: "rental_button" %>
-<% end %>
+    <h4 class="subtitle"><%= @rental.item.name %></h4>
+      <table class="item_info table table table-bordered">
+        <tbody>
+          <tr><th>カテゴリ</th><td><%= @rental.item.category.name %></td></tr>
+          <tr><th>保管場所</th><td><%= @rental.item.place%></td></tr>
+          <tr><th>説明</th><td><%= @rental.item.caption %></td></tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <%= form_with(model: @rental, local: true, url: "/rentals/#{@rental.id}/confirm") do |f| %>
+          <%= f.label :貸出日 %>
+          <%= f.date_field :rental_date, class:"form-control" %>
+          <%= f.label :返却予定日 %>&emsp;
+          <p class="rental_attention">返却日を入力してください。</p>
+          <%= f.date_field :return_date, class:"form-control" %><br>
+          <%= f.hidden_field :item_id, value: @rental.item.id %>
+          <%= f.submit "貸出", id: "rental_button" %>
+        <% end %>
+      </div>
+    </div>
+</div>

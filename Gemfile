@@ -71,6 +71,7 @@ gem 'kaminari','~> 1.2.1'
 gem 'cancancan'
 gem 'dotenv-rails'
 gem 'rails-i18n'
+gem 'font-awesome-sass'
 group :production do
   gem 'mysql2'
 end

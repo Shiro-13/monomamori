@@ -1,6 +1,21 @@
-<h2>備品一覧</h2>
+<h2 class="page_title col-lg-4 offset-lg-4">備品一覧</h2>
+<a>カテゴリ選択</a>
+<div class="button-group">
 
-<%= link_to "備品の追加", new_item_path,class: "btn btn_yellow mt-3" %><br>
+  <div class="f_item">
+    <%= link_to "　書籍　", new_item_path, class: "btn btn-outline-blue mt-3" %>
+  </div>
+  <div class="f_item">
+    <%= link_to "　電子機器　", new_item_path, class: "btn btn-outline-blue mt-3" %>
+  </div>
+  <div class="f_item">
+    <%= link_to "　その他　", new_item_path, class: "btn btn-outline-blue mt-3" %>
+  </div>
+  <div class="f_item">
+    <%= link_to "　備品の追加　", new_item_path, class: "btn btn_yellow mt-3" %></br>
+  </div>
+</div>
+<br>
 
 <hr>
 

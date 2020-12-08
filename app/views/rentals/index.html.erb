@@ -1,30 +1,61 @@
-<h4><%= flash[:success] %> <%= flash[:notice] %></h4>
-<h2>貸出履歴一覧</h2>
-<hr>
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr class="info">
-      <th>名前</th>
-      <th>貸出日</th>
-      <th>返却日</th>
-      <th>状態</th>
-      <th><!--削除ボタン--></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rentals.each do |rental| %>
-      <% if rental.is_returned == "返却済み" %>
-        <tr>
-          <td><%= rental.item.name %></td>
-          <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
-          <td><%= rental.days.strftime('%Y/%m/%d') %></td>
-          <td><%= rental.is_returned %></td>
-          <td>
-            <%= link_to '削除', rental_path(rental.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= flash[:success] %> <%= flash[:notice] %>
+<h2 class="page_title col-lg-4 offset-lg-4">貸出履歴一覧</h2>
+<div class="row">
+  <div class="col-lg-9 offset-lg-3 mx-auto">
+    <h4 class="subtitle">借りている備品</h4>
+      <table class="rental_list table table table-bordered overflow-auto">
+        <thead class="thead-light">
+          <tr>
+            <th>名前</th>
+            <th>貸出日</th>
+            <th>返却予定日</th>
+            <th><!--返却ボタン--></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @rentals.each do |rental| %>
+              <% if rental.is_returned == "貸出中" %>
+                <tr>
+                  <td><%= rental.item.name %></td>
+                  <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
+                  <td>
+                    <%= link_to '　返却　', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn_yellow" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+        </tbody>
+      </table>
+	</div>
+	<div class="col-lg-9 offset-lg-3 mt-5 mx-auto">
+    <h4 class="subtitle">利用履歴</h4>
+      <table class="returned_list table table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>名前</th>
+            <th>貸出日</th>
+            <th>返却日</th>
+            <th>状態</th>
+            <th><!--削除ボタン--></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @rentals.each do |rental| %>
+              <% if rental.is_returned == "返却済み" %>
+                <tr>
+                  <td><%= rental.item.name %></td>
+                  <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= rental.days.strftime('%Y/%m/%d') %></td>
+                  <td><%= rental.is_returned %></td>
+                  <td class="text-center">
+                    <%= link_to '　削除　', rental_path(rental.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn_red" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+        </tbody>
+      </table>
+	</div>
+</div> <!-- /row -->
 

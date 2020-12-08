@@ -14,7 +14,7 @@ ja:
         name: 名前
         place: 保管場所
         caption: 説明
-        category_id: カテゴリ
+        category: カテゴリ
       rental:
         rental_date: 貸出日
         return_date: 返却予定日

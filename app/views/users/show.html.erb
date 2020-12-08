@@ -1,73 +1,41 @@
-<h2><%= @user.name %>さんのページ</h2>
-<div class="col-xs-3">
-  <h3>登録情報</h3>
-    <table class="table">
-      <tbody>
-        <tr>
-          <th>顧客ID</th>
-          <td>
-            <label for="name"><%= @user.id %>　<span class="label label-info"><%= @user.role %></span></label>
-          </td>
-        </tr>
-        <tr>
-          <th>氏名</th>
-          <td><%= @user.name%></td>
-        </tr>
-        <tr>
-          <th>所属</th>
-          <td><%= @user.department %></td>
-        </tr>
-        <tr>
-          <th>メールアドレス</th>
-          <td><%= @user.email %></td>
-        </tr>
-      </tbody>
-    </table>
-    <%= link_to "登録情報を編集する", edit_user_path, class: "btn btn-success" %>
-  </div>
-
-<div class="col-xs-9">
-    <h3>借りている備品</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>名前</th>
-            <th>貸出日</th>
-            <th>返却予定日</th>
-            <th><!--返却ボタン--></th>
-          </tr>
-        </thead>
+<h2 class="page_title col-lg-4 offset-lg-4"><%= @user.name %>さんのページ</h2>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mx-auto">
+    <h4 class="subtitle">登録者情報</h4>
+    <details> <!--かんたんアコーディオン設定-->
+      <summary>登録情報を見る</summary>
+      <%# ユーザー情報編集ボタン %>
+      <div class="offset-lg-11">
+        <%= link_to edit_user_path do %>
+          <i class="fas fa-user-edit"></i>
+        <% end %>
+      </div>
+      <table class="user_profile table table table-bordered">
         <tbody>
-            <% @rentals.each do |rental| %>
-              <% if rental.is_returned == "貸出中" %>
-                <tr>
-                  <td><%= rental.item.name %></td>
-                  <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
-                  <td><%= rental.return_date %></td>
-                  <td><%= link_to '返却', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn-danger" %></td>
-                </tr>
-              <% else %>
-                <h4>借りている備品はありません。</h4>
-              <% end %>
-    				<% end %>
+          <tr><th>利用者ID</th><td><label for="name"><%= @user.id %></td></tr>
+          <tr><th>氏名</th><td><%= @user.name%></td></tr>
+          <tr><th>所属</th><td><%= @user.department %></td></tr>
+          <tr><th>メールアドレス</th><td><%= @user.email %></td></tr>
+           <tr><th>ステータス</th><td><%= @user.role %></td></tr>
         </tbody>
       </table>
-	</div>
+    </div>
+  </div> <!-- /row -->
+</details>
 
-  <div class="col-xs-9">
-   <h3>ブックマークした備品</h3>
-      <table class="table">
-        <thead>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mt-5 mx-auto">
+   <h4 class="subtitle">ブックマークした備品</h4>
+      <table class="table table-bordered">
+        <thead class="thead-light">
           <tr>
             <th>名前</th>
             <th>カテゴリ</th>
             <th>保管場所</th>
             <th>貸出情報</th>
             <th></th>
-            <th colspan="3"></th>
           </tr>
         </thead>
-
         <tbody>
           <% if @favorite_list.present? %>
             <% @favorite_list.each do |favo| %>
@@ -76,10 +44,11 @@
                 <td><%= favo.category.name %></td>
                 <td><%= favo.place %></td>
                 <td><%= favo.status %></td>
-                <td><%= link_to "詳細", item_path(@favorite_list), class: "btn btn-primary" %></td>
+                <td><%= link_to "詳細", item_path(@favorite_list), class: "btn btn_light_blue" %></td>
               </tr>
             <% end %>
           <% end %>
         </tbody>
       </table>
 	</div>
+</div> <!-- /row -->

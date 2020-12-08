@@ -20,5 +20,5 @@
   <%= f.label :返却予定日 %>
   <%= f.date_field :return_date, include_blank: true %><br>
   <%= f.hidden_field :item_id, value: @rental.item.id %>
-  <%= f.submit "貸出", id: "rental_button" %>
+  <%= f.submit "貸出", class:"btn btn_yellow btn-block" %>
 <% end %>

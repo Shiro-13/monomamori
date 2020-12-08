@@ -1,11 +1,13 @@
+<h2 class="page_title col-lg-4 offset-lg-4">”<%= @item.name %>”の編集</h2>
 <%= render 'layouts/error_messages', resource: @item %>
-
-<h2 class="section-ttl">”<%= @item.name %>”の編集</h2>
-<%= form_with model: @item, url: item_path(@item), local: true do |f| %>
-<div class="item_image">
-  <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
-  <%= f.attachment_field :image %>
-</div>
+<div class="row">
+  <div class="col-lg-3 offset-lg-1">
+    <%= form_with model: @item, url: item_path(@item), local: true do |f| %>
+    <div class="item_image">
+      <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
+      <%= f.attachment_field :image %>
+    </div>
+  </div>
   <!-- 画像プレビュー -->
 	<script>
     $(function(){
@@ -22,37 +24,18 @@
 	     });
 	   });
 	</script>
-
-<h4>名前</h4>
-<div class="item-from">
-  <%= f.text_field :name, class:"form-control" %>
-</div>
-
-<h4>カテゴリ</h4>
-<div class="item-from">
-  <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %>
-</div>
-
-<h4>保管場所</h4>
-<div class="item-from">
-  <%= f.text_field :place, class:"form-control" %>
-</div>
-
-<h4>説明</h4>
-<div class="item-from">
-  <%= f.text_field :caption, class:"form-control" %>
-</div>
-
-<h4>貸出ステータス</h4>
-<div class="item-from">
-  <%= f.radio_button :status, "貸出可"%>
-  <%= f.label :"貸出可" %>&emsp;
-  <%= f.radio_button :status, "貸出中" %>
-  <%= f.label :"貸出中" %>
-</div>
-
-<div class="flex align-center pl5">
-	<%= f.submit "登録内容を更新する", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
-</div>
-
+  <div class="col-lg-6 ml-5">
+    <div class="from-group">
+      <%= f.label :名前 %><br>
+      <%= f.text_field :name, class:"form-control" %><br>
+      <%= f.label :カテゴリ %><br>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %><br>
+      <%= f.label :保管場所 %><br>
+      <%= f.text_field :place, class:"form-control" %><br>
+      <%= f.label :説明 %><br>
+      <%= f.text_field :caption, class:"form-control" %><br>
+    	<%= f.submit "登録内容を更新する", class:"btn btn_yellow btn-block" %>
+    </div>
+  </div>
 <% end %>
+</div><!-- /row -->
