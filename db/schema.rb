@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_074908) do
+ActiveRecord::Schema.define(version: 2020_12_04_052956) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2020_12_05_074908) do
     t.datetime "return_date"
     t.datetime "rental_date"
     t.boolean "is_returned", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "item_id"
     t.datetime "days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_12_05_074908) do
     t.string "department"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.string "name"
     t.integer "role", default: 2, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
