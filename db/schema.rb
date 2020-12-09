@@ -27,18 +27,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_074908) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "item_rental_infos", force: :cascade do |t|
-    t.integer "rental_count", default: 0
-    t.boolean "is_rentaled", default: false
-    t.integer "last_rental_id"
-    t.string "last_rental_name"
-    t.integer "now_rental_id"
-    t.string "now_rental_name"
-    t.integer "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", force: :cascade do |t|
     t.integer "category_id"
     t.integer "rental_id"
@@ -52,13 +40,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_074908) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "post_rentals", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
