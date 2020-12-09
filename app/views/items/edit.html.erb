@@ -1,8 +1,8 @@
 <h2 class="page_title col-lg-4 offset-lg-4">”<%= @item.name %>”の編集</h2>
 <%= render 'layouts/error_messages', resource: @item %>
+<%= form_with model: @item, url: item_path(@item), local: true do |f| %>
 <div class="row">
   <div class="col-lg-3 offset-lg-1">
-    <%= form_with model: @item, url: item_path(@item), local: true do |f| %>
     <div class="item_image">
       <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
       <%= f.attachment_field :image %>

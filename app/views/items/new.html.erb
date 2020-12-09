@@ -1,8 +1,8 @@
 <h2 class="page_title col-lg-4 offset-lg-4">備品新規登録</h2>
 <%= render 'layouts/error_messages', resource: @item %>
+<%= form_with model: @item, url: items_path, local: true do |f| %>
 <div class="row">
   <div class="col-lg-3 offset-lg-1">
-  <%= form_with model: @item, url: items_path, local: true do |f| %>
     <div class="item_image">
       <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
       <%= f.attachment_field :image %>
@@ -25,23 +25,23 @@
 	   });
 	</script>
   <div class="col-lg-6 ml-5">
-    <div class="from-group">
-      <%= f.label :name, "名前" %><br>
-      <%= f.text_field :name, class:"form-control" %>
+      <div class="from-group">
+        <%= f.label :name, "名前" %><br>
+        <%= f.text_field :name, class:"form-control" %>
+      </div>
+      <div class="from-group">
+        <%= f.label :category_id, "カテゴリ" %><br>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %>
+      </div>
+      <div class="from-group">
+        <%= f.label :place, "保管場所" %><br>
+        <%= f.text_field :place, class:"form-control" %>
+      </div>
+      <div class="from-group">
+        <%= f.label :caption, "説明" %><br>
+        <%= f.text_field :caption, class:"form-control" %><br>
+      </div>
+      	<%= f.submit "新規登録", class:"btn btn_yellow btn-block" %>
     </div>
-    <div class="from-group">
-      <%= f.label :category_id, "カテゴリ" %><br>
-      <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "選択してください"}) %>
-    </div>
-    <div class="from-group">
-      <%= f.label :place, "保管場所" %><br>
-      <%= f.text_field :place, class:"form-control" %>
-    </div>
-    <div class="from-group">
-      <%= f.label :caption, "説明" %><br>
-      <%= f.text_field :caption, class:"form-control" %><br>
-    </div>
-    	<%= f.submit "登録内容を更新する", class:"btn btn_yellow btn-block" %>
-  </div>
-<% end %>
+  <% end %>
 </div><!-- /row -->
