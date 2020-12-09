@@ -4,12 +4,14 @@ ja:
       user: ユーザー
       item: 備品
       rental: 貸出
+      category: カテゴリ
     attributes:
       user:
         name: 名前
         department: 所属部署
         email: メールアドレス
         crypted_password: パスワード
+        password: パスワード
       item:
         name: 名前
         place: 保管場所
@@ -18,4 +20,6 @@ ja:
       rental:
         rental_date: 貸出日
         return_date: 返却予定日
+      category:
+        name: 名前
 

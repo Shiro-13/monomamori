@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :rentals, dependent: :destroy
-  has_many :post_rentals
-  has_many :items, through: :post_rentals
+  has_many :items
   has_many :favorites, dependent: :destroy
   has_many :favorite_items, through: :favorites, source: :item # ユーザーがブックマークした備品を直接アソシエーションで取得
 

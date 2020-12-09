@@ -1,14 +1,17 @@
-<h2>カテゴリ管理</h2>
-
-  <h3>カテゴリ新規登録</h3>
-  <%= form_with model: @category, url: categories_path, local: true do |f| %>
-    <%= f.label :name, "カテゴリ名:" %>
-    <%= f.text_field :name %>
-    <%= f.submit "追加" %>
-  <% end %>
-
-  <table class="table table-hover table-inverse">
-    <thead>
+<h2 class="page_title col-lg-6 offset-lg-4">カテゴリ管理</h2>
+<%= render 'layouts/error_messages', resource: @category %>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mx-auto">
+    <h4 class="subtitle">カテゴリ新規登録</h4>
+      <%= form_with model: @category, url: categories_path, local: true do |f| %>
+        <div class="form-group d-flex">
+          <%= f.label :name, "カテゴリ名:" %>
+          <%= f.text_field :name, class:"form-control col-lg-5 ml-2" %>
+          <%= f.submit "　追加　", class:"btn btn_yellow ml-3" %>
+        </div>
+      <% end %>
+  <table class="table table table-bordered mt-5">
+    <thead class="category_list thead-light">
       <tr>
         <th>カテゴリ一覧</th>
         <th></th>
@@ -19,9 +22,12 @@
         <% @categories.each do |category| %>
         <tr>
           <td><%= category.name %></td>
-          <td><%= link_to "編集する", edit_category_path(category) %></td>
+          <td><%= link_to "編集する", edit_category_path(category), class: "btn btn-outline-blue" %></td>
         </tr>
         <% end %>
       </tbody>
     </tbody>
   </table>
+
+  </div>
+  </div>

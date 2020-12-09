@@ -1,6 +1,6 @@
-<h2 class="page_title col-lg-4 offset-lg-4"><%= @user.name %>さんのページ</h2>
+<h2 class="page_title col-lg-6 offset-lg-4"><%= @user.name %>さんのページ</h2>
 <div class="row">
-  <div class="col-lg-6 offset-lg-3 mx-auto">
+  <div class="col-lg-10 offset-lg-3 mx-auto">
     <h4 class="subtitle">登録者情報</h4>
     <details> <!--かんたんアコーディオン設定-->
       <summary>登録情報を見る</summary>
@@ -24,8 +24,9 @@
 </details>
 
 <div class="row">
-  <div class="col-lg-6 offset-lg-3 mt-5 mx-auto">
+  <div class="col-lg-10 offset-lg-3 mt-5 mx-auto">
    <h4 class="subtitle">ブックマークした備品</h4>
+   <% if @favorite_list.present? %>
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -37,18 +38,19 @@
           </tr>
         </thead>
         <tbody>
-          <% if @favorite_list.present? %>
-            <% @favorite_list.each do |favo| %>
-              <tr>
-                <td><%= favo.name %></td>
-                <td><%= favo.category.name %></td>
-                <td><%= favo.place %></td>
-                <td><%= favo.status %></td>
-                <td><%= link_to "詳細", item_path(@favorite_list), class: "btn btn_light_blue" %></td>
-              </tr>
-            <% end %>
+          <% @favorite_list.each do |favo| %>
+            <tr>
+              <td><%= favo.name %></td>
+              <td><%= favo.category.name %></td>
+              <td><%= favo.place %></td>
+              <td><%= favo.status %></td>
+              <td><%= link_to "詳細", item_path(@favorite_list), class: "btn btn_light_blue" %></td>
+            </tr>
           <% end %>
         </tbody>
       </table>
+    <% else %>
+      <p>ブックマークした備品はありません。</p>
+    <% end %>
 	</div>
 </div> <!-- /row -->
