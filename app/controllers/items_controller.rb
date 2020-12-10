@@ -37,14 +37,18 @@ def update
   end
 end
 
-def destroy
-  if @item.destroy
-    redirect_to items_path
-  else
-    render :show
-  end
+def category_items
+  @category = Category.find(params[:id])
+  @items = @category.items.all
+  @items = @items.page(params[:page])
+  @user = current_user
 end
 
+def destroy
+  item = Item.find(params[:id])
+  item.destroy
+  redirect_to items_path
+end
 
 private
 def item_params

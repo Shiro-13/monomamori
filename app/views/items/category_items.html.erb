@@ -1,0 +1,15 @@
+<h2 class="page_title col-lg-6 offset-lg-4"><%= @category.name %></h2>
+<div class="col-lg-10 mx-auto">
+  <p>カテゴリ選択</p>
+  <div class="d-flex">
+    <% Category.all.each do |category| %>
+      <%= link_to category.name, category_items_path(category), class: "btn btn-outline-blue mr-2" %>
+    <% end %>
+    <div class="offset-lg-6">
+      <%= link_to "　備品一覧に戻る　", items_path, class: "btn btn_light_blue" %>
+    </div>
+  </div>
+  <hr>
+  <p>(全<%= @items.count %>件)</p>
+    <%= render 'items/item_list', resource: @items %>
+</div>

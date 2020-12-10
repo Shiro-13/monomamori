@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :items do
     resource :favorites, only: [:create, :destroy]
   end
+  get 'category_items/:id' => "items#category_items", as: "category_items"
   resources :rentals, only: [:index, :create, :update, :destroy]
   get '/rentals/pre_rental' => 'rentals#pre_rental'
   patch '/rentals/:id/confirm' => 'rentals#confirm'
