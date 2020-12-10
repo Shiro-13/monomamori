@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_052956) do
     t.integer "category_id"
     t.integer "rental_id"
     t.string "name"
-    t.integer "image_id"
+    t.string "image_id"
     t.string "place"
     t.integer "status", default: 0
     t.text "caption"

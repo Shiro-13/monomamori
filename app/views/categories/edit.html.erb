@@ -1,7 +1,13 @@
-<h2>カテゴリ編集</h2>
-
-<%=  form_with model: @category, url: category_path(@category), method: :patch, local: true do |f| %>
-  <%= f.label :name, "カテゴリ名:" %>
-  <%= f.text_field :name %>
-  <%= f.submit "変更を保存する" %>
-<% end %>
+<h2 class="page_title col-lg-6 offset-lg-4">カテゴリ編集</h2>
+<%= render 'layouts/error_messages', resource: @category %>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mx-auto">
+    <%=  form_with model: @category, url: category_path(@category), method: :patch, local: true do |f| %>
+    <div class="form-group d-flex">
+      <%= f.label :name, "カテゴリ名:" %>
+      <%= f.text_field :name, class:"form-control col-lg-5 ml-2" %>
+      <%= f.submit "　変更を保存する　", class:"btn btn_yellow ml-3" %>
+    </div>
+    <% end %>
+  </div>
+</div>

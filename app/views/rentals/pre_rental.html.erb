@@ -19,8 +19,9 @@
           <p class="rental_attention">返却日を入力してください。</p>
           <%= f.date_field :return_date, class:"form-control" %><br>
           <%= f.hidden_field :item_id, value: @rental.item.id %>
-          <%= f.submit "貸出", id: "rental_button" %>
+          <%= f.submit "貸出", class:"btn btn_yellow btn-block" %>
         <% end %>
       </div>
+      <%= link_to "Back", :back %>
     </div>
 </div>

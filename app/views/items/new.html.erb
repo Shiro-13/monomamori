@@ -3,9 +3,13 @@
 <%= form_with model: @item, url: items_path, local: true do |f| %>
 <div class="row">
   <div class="col-lg-3 offset-lg-1">
-    <div class="item_image">
-      <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
-      <%= f.attachment_field :image %>
+    <div class="item">
+      <div class="thumbnail">
+        <div class="inner">
+          <%= attachment_image_tag @item, :image, class: "image", fallback: "no-image.png" %>
+          <%= f.attachment_field :image %>
+        </div>
+    </div>
     </div>
   </div>
   <!-- 画像プレビュー -->

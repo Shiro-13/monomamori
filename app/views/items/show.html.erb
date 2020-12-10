@@ -2,14 +2,15 @@
   <div class="row">
     <div class="col-lg-3 offset-lg-1">
       <div class="item_image">
-        <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %>
-      </div>
-      <div id="favorite_buttons_<%= @item.id %>">
+        <%= attachment_image_tag @item, :image, class: "img", fallback: "no-image.png", size:"300x250" %><br>
+        <div class="col-lg-9" id="favorite_buttons_<%= @item.id %>">
       <%= render partial: "favorites/favorite", locals: {item: @item} %>
       </div>
+      </div>
+
     </div>
     <div class="col-lg-6 ml-5">
-      <h4><%= @item.name %></h4>
+      <h4 class="subtitle"><%= @item.name %></h4>
       <div class="offset-lg-10">
         <div class="button-group">
         <% if can? :update, Item %>
@@ -51,5 +52,6 @@
           <% end %>
         <% end %>
       </div>
+      <div class="offset-lg-10 "><%= link_to "Back", :back %></div>
     </div>
   </div> <!-- /row -->
