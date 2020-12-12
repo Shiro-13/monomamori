@@ -45,8 +45,8 @@ def category_items
 end
 
 def destroy
-  if @item.status == '貸出可'
-    item = Item.find(params[:id])
+  item = Item.find(params[:id])
+  if item.status == '貸出可'
     item.destroy
     redirect_to items_path
   else
