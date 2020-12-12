@@ -17,6 +17,9 @@
   <hr>
   <%= render 'items/item_list', resource: @item %>
   </div>
+  <div class="mx-auto">
+      <%= paginate(@items) %>
+    </div>
 </div><!-- /row -->
 
 
