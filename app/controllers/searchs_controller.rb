@@ -4,6 +4,7 @@ class SearchsController < ApplicationController
   #   # 検索ワードを@searchに代入。
     @items = Item.search(params[:search])
     @search = params[:search]
+    @items = @items.page(params[:page])
   end
 
 end
