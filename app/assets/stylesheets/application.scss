@@ -344,3 +344,60 @@ a{
 }
 
 
+
+// 見出し
+.about-item_catch {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+// 本文
+.about-item_text {
+    margin-top: 1.46412884vw;
+    font-size: 1.09809663vw;
+}
+
+// バック四角
+.about-item_left {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    max-width: 272px;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    border-radius: 15px;
+    background-color: #f1f2f6;
+}
+
+.about-item_name {
+    font-size: 16px;
+    line-height: 1.1;
+    color: $navy;
+}
+// 番号
+.about-item_number {
+    margin-top: 0.58565154vw;
+    font-size: 2.7818448vw;
+    line-height: 1.1;
+    font-weight: bold;
+    color: $navy;
+}
+
+// image
+.about-item_image img {
+    width: 100%;
+}
+
+.about_title{
+
+}
+
+.about_text_box{
+	display: block;
+  position: relative;
+  margin: 0;
+  text-align: center
+}
