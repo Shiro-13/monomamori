@@ -33,7 +33,7 @@
             <% if @item.status == '貸出可' %>
               貸出可
             <% else %>
-              貸出中
+              貸出中<br>(利用者：<%= @user.name %>&emsp;返却予定日：<%= @rental.return_date.strftime('%Y/%m/%d') %>)
             <% end %>
           </td></tr>
         </tbody>

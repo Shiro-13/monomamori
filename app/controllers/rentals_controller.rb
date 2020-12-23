@@ -16,9 +16,8 @@ class RentalsController < ApplicationController
 
   def create
     @user = current_user
-    @rental = Rental.new(rental_params)
+    @rental = current_user.rentals.new(rental_params)
     @item =Item.find(params[:rental][:item_id])
-    @rental.user_id = current_user.id
     if @rental.save
       redirect_to rentals_pre_rental_path(rental_id: @rental.id)
     else
@@ -33,8 +32,6 @@ class RentalsController < ApplicationController
     if @rental.save
       # 貸出後、備品ステータスを更新する
       Item.find(@rental.item_id).update(status: "貸出中")
-      # @item = Item.find(params[:rental][:item_id]) # 備品の特定
-      # @item.update(status: "貸出中") #備品ステータスの更新
       flash[:success] = "備品の貸出手続きが完了しました!"
       redirect_to rentals_path
     else
@@ -44,7 +41,7 @@ class RentalsController < ApplicationController
 
   def return
     @rental = Rental.find(params[:id])
-    @rental.days = Date.today.to_s
+    @rental.days = Date.today
     @rental.update(is_returned: "返却済み")
     if @rental.save
       Item.find(@rental.item_id).update(status: "貸出可")

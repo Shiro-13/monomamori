@@ -21,7 +21,12 @@ end
 def show
   @user = current_user
   @item = Item.find(params[:id])
-  @rental = Rental.new
+  if @item.status == '貸出可'
+    @rental = Rental.new
+  else
+    @rental = Rental.find_by(id: params[:id])
+    @user = User.find_by(id: @rental.user_id)
+  end
 end
 
 def edit
