@@ -9,8 +9,6 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     user = params[:user_id]
-    # @items = @user.items
-    # @item = Item.find(params[:id])
     favorites = Favorite.where(user_id: current_user.id).pluck(:item_id)  # ログイン中のユーザーのお気に入りのitem_idカラムを取得
     @favorite_list = Item.find(favorites)     # itemsテーブルから、お気に入り登録済みのレコードを取得
     rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_orderを使用するためrentalに代入。
