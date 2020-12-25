@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get 'category_items/:id' => "items#category_items", as: "category_items"
   resources :rentals, only: [:index, :create, :update, :destroy]
   get '/rentals/pre_rental' => 'rentals#pre_rental'
-  patch '/rentals/:id/confirm' => 'rentals#confirm'
+  post '/rentals/pre_rental' => 'rentals#pre_rental', as: 'pre_rental'
+  patch '/rentals/:id/confirm' => 'rentals#confirm', as: 'confirm'
   patch '/rentals/:id/return' => 'rentals#return', as: 'return'
   resources :logs
   resources :post_rentals, only:[:index, :update, :create]

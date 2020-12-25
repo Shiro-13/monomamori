@@ -12,14 +12,14 @@
         </tbody>
       </table>
       <div class="form-group">
-        <%= form_with(model: @rental, local: true, url: "/rentals/#{@rental.id}/confirm") do |f| %>
+        <%= form_with(model: @rental, local: true, url: confirm_path(@rental)) do |f| %>
           <%= f.label :貸出日 %>
-          <%= f.date_field :rental_date, class:"form-control" %>
+          <%= f.date_field :rental_date, class:"form-control", min: Date.current %>
           <%= f.label :返却予定日 %>&emsp;
           <p class="rental_attention">返却日を入力してください。</p>
-          <%= f.date_field :return_date, class:"form-control" %><br>
+          <%= f.date_field :return_date, class:"form-control", min: Date.current %><br>
           <%= f.hidden_field :item_id, value: @rental.item.id %>
-          <%= f.submit "貸出", class:"btn btn_yellow btn-block" %>
+          <%= f.submit "貸出", data: { confirm: "この備品をレンタルします。よろしいですか？" }, class:"btn btn_yellow btn-block" %>
         <% end %>
       </div>
       <%= link_to "Back", :back %>

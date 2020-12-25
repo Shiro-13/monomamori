@@ -6,6 +6,7 @@
       <table class="rental_list table table table-bordered overflow-auto">
         <thead class="thead-light">
           <tr>
+            <th>No.</th>
             <th>名前</th>
             <th>貸出日</th>
             <th>返却予定日</th>
@@ -13,9 +14,9 @@
           </tr>
         </thead>
         <tbody>
-            <% @rentals.each do |rental| %>
-              <% if rental.is_returned == "貸出中" %>
+            <% @rentals.each_with_index do |rental, i| %>
                 <tr>
+                  <td><%= i+1 %> </td>
                   <td><%= rental.item.name %></td>
                   <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
                   <td><%= rental.return_date.strftime('%Y/%m/%d') %></td>
@@ -23,36 +24,31 @@
                     <%= link_to '　返却　', return_path(rental.id), method: :patch, data: { confirm: "この備品を返却します。よろしいですか？" }, class: "btn btn_yellow" %>
                   </td>
                 </tr>
-              <% end %>
             <% end %>
         </tbody>
       </table>
 	</div>
 	<div class="col-lg-9 offset-lg-3 mt-5 mx-auto">
-    <h4 class="subtitle">利用履歴</h4>
+    <h4 class="subtitle">利用履歴</h4><span>（最新10件まで表示）</span>
       <table class="returned_list table table table-bordered">
         <thead class="thead-light">
           <tr>
+            <th>No.</th>
             <th>名前</th>
             <th>貸出日</th>
             <th>返却日</th>
             <th>状態</th>
-            <th><!--削除ボタン--></th>
           </tr>
         </thead>
         <tbody>
-            <% @rentals.each do |rental| %>
-              <% if rental.is_returned == "返却済み" %>
+            <% @returns.each_with_index do |returns, i| %>
                 <tr>
-                  <td><%= rental.item.name %></td>
-                  <td><%= rental.rental_date.strftime('%Y/%m/%d') %></td>
-                  <td><%= rental.days.strftime('%Y/%m/%d') %></td>
-                  <td><%= rental.is_returned %></td>
-                  <td class="text-center">
-                    <%= link_to '　削除　', rental_path(rental.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn_red" %>
-                  </td>
+                  <td><%= i+1 %> </td>
+                  <td><%= returns.item.name %></td>
+                  <td><%= returns.rental_date.strftime('%Y/%m/%d') %></td>
+                  <td><%= returns.days.strftime('%Y/%m/%d') %></td>
+                  <td><%= returns.is_returned %></td>
                 </tr>
-              <% end %>
             <% end %>
         </tbody>
       </table>

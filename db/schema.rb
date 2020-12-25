@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2020_12_04_052956) do
     t.string "department"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin"
     t.string "name"
     t.integer "role", default: 2, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
