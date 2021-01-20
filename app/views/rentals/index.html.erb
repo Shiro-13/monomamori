@@ -45,8 +45,8 @@
                 <tr>
                   <td><%= i+1 %> </td>
                   <td><%= returns.item.name %></td>
-                  <td><%= returns.rental_date.strftime('%Y/%m/%d') %></td>
-                  <td><%= returns.days.strftime('%Y/%m/%d') %></td>
+                  <td><%#= returns.rental_date.strftime('%Y/%m/%d') %></td>
+                  <td><%#= returns.days.strftime('%Y/%m/%d') %></td>
                   <td><%= returns.is_returned %></td>
                 </tr>
             <% end %>

@@ -1,10 +1,15 @@
 class Rental < ApplicationRecord
   belongs_to :item
   belongs_to :user
-  # validates :rental_date, :return_date, presence: true
+  validate :date_return
+
+  def date_return
+    return if return_date.blank? || rental_date.blank?
+    errors.add(:return_date, "は貸出日以降のものを選択してください") if return_date < rental_date
+  end
 
   enum is_returned: {
-    返却済み: true,
-    貸出中: false
+    貸出中: true,
+    返却済み: false
   }
 end

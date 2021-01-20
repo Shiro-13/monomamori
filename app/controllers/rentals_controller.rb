@@ -3,19 +3,19 @@ class RentalsController < ApplicationController
 
   def index
     @user = current_user
-    rentals = current_user.rentals.all.reverse_order # revers_rentalでrental情報を古い順に表示。revers_orderを使用するためrentalに代入。
-    @rentals = current_user.rentals.all
+    @rentals = current_user.rentals.where(is_returned: true).reverse_order
+    @returns = current_user.rentals.where(is_returned: false).reverse_order.limit(10)
   end
 
   def pre_rental
     @user = current_user
     rental_id = params[:rental_id]
     @rental = Rental.find(rental_id)
-    @rental.rental_date = Date.today.to_s
+    @rental.rental_date = Date.today
+    @rental.return_date = Date.today
   end
 
   def create
-    @user = current_user
     @rental = current_user.rentals.new(rental_params)
     @item =Item.find(params[:rental][:item_id])
     if @rental.save
@@ -31,11 +31,12 @@ class RentalsController < ApplicationController
     @rental.return_date = params[:rental][:return_date]
     if @rental.save
       # 貸出後、備品ステータスを更新する
+      @rental.update(is_returned: "貸出中")
       Item.find(@rental.item_id).update(status: "貸出中")
       flash[:success] = "備品の貸出手続きが完了しました!"
       redirect_to rentals_path
     else
-      render :new
+      render :pre_rental
     end
   end
 

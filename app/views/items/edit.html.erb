@@ -41,6 +41,17 @@
       <%= f.label :caption, "説明" %><br>
       <%= f.text_field :caption, class:"form-control" %><br>
     </div>
+    <div class="from-group">
+      <%= f.label :place, "保管場所" %><br>
+      <%= f.text_field :place, class:"form-control" %>
+    </div>
+    <div class="from-group">
+      <%= f.label :status, "貸出ステータス"%><br>
+      <%= f.radio_button :status, "貸出可"%>
+      <%= f.label :"貸出可" %>&emsp;
+      <%= f.radio_button :status, "貸出中" %>
+      <%= f.label :"貸出中" %>
+    </div>
     	<%= f.submit "登録内容を更新する", class:"btn btn_yellow btn-block" %>
   </div>
 <% end %>
