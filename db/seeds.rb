@@ -9,11 +9,19 @@
 Category.create!(
   name: "書籍"
   )
-  
+
 Category.create!(
   name: "電子機器"
   )
-  
+
 Category.create!(
   name: "その他"
+  )
+
+User.create!(
+  email: "admin@admin.com",
+  password: "aaaaaa",
+  department: "総務部",
+  name: "池波正太郎",
+  role: "admin"
   )
